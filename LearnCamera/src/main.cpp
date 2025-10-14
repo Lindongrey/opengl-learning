@@ -18,6 +18,13 @@ glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
+float pitch = 0.0f;
+float yaw = -90.0f;
+float roll = 0.0f;
+float lastX = 400.0f;
+float lastY = 300.0f;
+float fov = 45.0f;
+bool firstMouse = true;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -35,22 +42,64 @@ void processInput(GLFWwindow* window)
         // 可以看到 cameraTarget 为 vec3(0.0f, 0.0f, 0.0f) 的问题：
         // 当移动到 (0, 0, 0) ，也就是 cameraPos 的 z 值为 0 时，就会停下（在调试时是进入了立方体内部）
         // 将 cameraTarget 改为一个 -z 方向的单位向量，就可以无限前进
-        cameraPos -= cameraPos * cameraSpeed;
-        // cameraPos += cameraSpeed * cameraFront;
+        // cameraPos -= cameraPos * cameraSpeed;
+        cameraPos += cameraSpeed * cameraFront;
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        cameraPos += cameraPos * cameraSpeed;
-        // cameraPos -= cameraSpeed * cameraFront;
+        // cameraPos += cameraPos * cameraSpeed;
+        cameraPos -= cameraSpeed * cameraFront;
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         // 旋转而非平移
-        cameraPos -= glm::normalize(glm::cross((cameraPos - cameraTarget), cameraUp)) * cameraSpeed;
-        // cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+        // cameraPos -= glm::normalize(glm::cross((cameraPos - cameraTarget), cameraUp)) * cameraSpeed;
+        cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        cameraPos += glm::normalize(glm::cross((cameraPos - cameraTarget), cameraUp)) * cameraSpeed;
-        // cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+        // cameraPos += glm::normalize(glm::cross((cameraPos - cameraTarget), cameraUp)) * cameraSpeed;
+        cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
     // 补偿不同渲染能力造成的速度差异
     float currentFrame = glfwGetTime();
     deltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
+}
+
+void mouse_callback(GLFWwindow* window, double xPos, double yPos)
+{
+    if (firstMouse)
+    {
+        lastX = xPos;
+        lastY = yPos;
+        firstMouse = false;
+    }
+
+    float xOffset = xPos - lastX;
+    float yOffset = lastY - yPos;
+    lastX = xPos;
+    lastY = yPos;
+
+    float sensitive = 0.1f;
+    xOffset *= sensitive;
+    yOffset *= sensitive;
+
+    pitch += yOffset;
+    yaw += xOffset;
+
+    if (pitch > 89.0)
+        pitch = 89.0;
+    if (pitch < -89.0)
+        pitch = -89.0;
+
+    glm::vec3 front;
+    front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    front.y = sin(glm::radians(pitch));
+    front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    cameraFront = glm::normalize(front);
+}
+
+void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
+{
+    fov -= (float)yOffset;
+    if (fov < 1.0f)
+        fov = 1.0f;
+    if (fov > 45.0f)
+        fov = 45.0f;
 }
 
 int initGLFW(GLFWwindow*& window) {
@@ -69,6 +118,13 @@ int initGLFW(GLFWwindow*& window) {
         return -1;
     }
     glfwMakeContextCurrent(window);
+
+    // 隐藏鼠标
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    // 设置鼠标转动
+    glfwSetCursorPosCallback(window, mouse_callback);
+    // 设置鼠标缩放
+    glfwSetScrollCallback(window, scroll_callback);
 
     // glViewport(0, 0, 800, 800);
 
@@ -238,11 +294,6 @@ int main() {
         glm::vec3(-1.3f,  1.0f, -1.5f)
     };
 
-    // 设置透视投影矩阵
-    glm::mat4 projection = glm::mat4(1.0f);
-    projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
-    glUniformMatrix4fv(glGetUniformLocation(ourShader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-
     // 渲染循环
     while (!glfwWindowShouldClose(window))
     {
@@ -291,12 +342,17 @@ int main() {
         glm::mat4 view = glm::mat4(1.0f);
         // pos 和 target 相减得出 z 方向，然后 z 和 up 叉乘得出一个方向（通常是右方向 x）
         // 最后 x 和 z 叉乘得出 y
-        view = glm::lookAt(cameraPos, cameraTarget, cameraUp);
-        // view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+        // view = glm::lookAt(cameraPos, cameraTarget, cameraUp);
+        view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
         // view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
         glUniformMatrix4fv(glGetUniformLocation(ourShader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
         // glUniformMatrix4fv(glGetUniformLocation(ourShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
         
+        // 设置透视投影矩阵
+        glm::mat4 projection = glm::mat4(1.0f);
+        projection = glm::perspective(glm::radians(fov), 800.0f / 600.0f, 0.1f, 100.0f);
+        glUniformMatrix4fv(glGetUniformLocation(ourShader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+
         
         // 深度测试与清除上一帧的深度缓冲
         glEnable(GL_DEPTH_TEST);
