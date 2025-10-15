@@ -1,11 +1,1 @@
-﻿  main.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\filesystem(12): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
-D:\WNY\CG\OpenGLLearning\projects\Lighting\Colors\src\main.cpp(58,24): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-D:\WNY\CG\OpenGLLearning\projects\Lighting\Colors\src\main.cpp(67,17): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\WNY\CG\OpenGLLearning\projects\Lighting\Colors\src\main.cpp(68,17): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\WNY\CG\OpenGLLearning\projects\Lighting\Colors\src\main.cpp(72,19): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-D:\WNY\CG\OpenGLLearning\projects\Lighting\Colors\src\main.cpp(73,19): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-D:\WNY\CG\OpenGLLearning\projects\Lighting\Colors\src\main.cpp(74,13): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\WNY\CG\OpenGLLearning\projects\Lighting\Colors\src\main.cpp(75,13): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\WNY\CG\OpenGLLearning\projects\Lighting\Colors\src\main.cpp(140,1): warning C4715: “initGLFW”: 不是所有的控件路径都返回值
-  Colors.vcxproj -> D:\WNY\CG\OpenGLLearning\projects\Lighting\x64\Debug\Colors.exe
+﻿  Colors.vcxproj -> D:\WNY\CG\OpenGLLearning\projects\Lighting\x64\Debug\Colors.exe

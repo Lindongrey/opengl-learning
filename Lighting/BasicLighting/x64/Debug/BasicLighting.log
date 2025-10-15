@@ -1,0 +1,11 @@
+﻿  main.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\filesystem(12): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+D:\WNY\CG\OpenGLLearning\projects\Lighting\BasicLighting\src\main.cpp(59,24): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+D:\WNY\CG\OpenGLLearning\projects\Lighting\BasicLighting\src\main.cpp(68,17): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\WNY\CG\OpenGLLearning\projects\Lighting\BasicLighting\src\main.cpp(69,17): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\WNY\CG\OpenGLLearning\projects\Lighting\BasicLighting\src\main.cpp(73,19): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+D:\WNY\CG\OpenGLLearning\projects\Lighting\BasicLighting\src\main.cpp(74,19): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+D:\WNY\CG\OpenGLLearning\projects\Lighting\BasicLighting\src\main.cpp(75,13): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\WNY\CG\OpenGLLearning\projects\Lighting\BasicLighting\src\main.cpp(76,13): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\WNY\CG\OpenGLLearning\projects\Lighting\BasicLighting\src\main.cpp(141,1): warning C4715: “initGLFW”: 不是所有的控件路径都返回值
+  BasicLighting.vcxproj -> D:\WNY\CG\OpenGLLearning\projects\Lighting\x64\Debug\BasicLighting.exe
