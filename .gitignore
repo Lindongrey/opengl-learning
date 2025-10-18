@@ -1,0 +1,5 @@
+# Visual Studio intellisense cache
+.vs/
+*.ipch
+*.iobj
+*.ipdb
