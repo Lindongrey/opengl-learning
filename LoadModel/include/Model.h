@@ -26,6 +26,10 @@ unsigned int TextureFromFile(const char* path, const string& directory);
 class Model
 {
 public:
+	vector<Mesh> meshes;
+	string directory;
+	// 已加载的纹理，如果新纹理与之一致就使用已加载的
+	vector<Texture> texture_loaded;
 	Model(char* path)
 	{
 		loadModel(path);
@@ -36,17 +40,12 @@ public:
 			meshes[i].Draw(shader);
 	}
 private:
-	vector<Mesh> meshes;
-	string directory;
-	// 已加载的纹理，如果新纹理与之一致就使用已加载的
-	vector<Texture> texture_loaded;
-
 	void loadModel(string path)
 	{
 		// std::cout << "[Model] Loading: " << path << std::endl;
 
 		Assimp::Importer import;
-		const aiScene *scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
+		const aiScene *scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_GenNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 		{
@@ -75,13 +74,13 @@ private:
 		// std::cout << "[processNode] Node name: " << node->mName.C_Str() << ", meshes: " << node->mNumMeshes << std::endl;
 		for (unsigned int i = 0; i < node->mNumMeshes; i++)
 		{
-			unsigned int meshIndex = node->mMeshes[i];   // ← 可能这里越界
+			// unsigned int meshIndex = node->mMeshes[i];   // ← 可能这里越界
 			// std::cout << "[processNode]   mesh index: " << meshIndex << " (scene->mNumMeshes=" << scene->mNumMeshes << ")" << std::endl;
 
-			if (meshIndex >= scene->mNumMeshes) {
+			// if (meshIndex >= scene->mNumMeshes) {
 				// std::cout << "[processNode]   mesh index out of range!" << std::endl;
-				throw std::runtime_error("mesh index out of range");
-			}
+			// 	throw std::runtime_error("mesh index out of range");
+			// }
 			aiMesh *mesh = scene->mMeshes[node->mMeshes[i]];
 			meshes.push_back(processMesh(mesh, scene));
 		}
@@ -111,10 +110,13 @@ private:
 			vector.z = mesh->mVertices[i].z;
 			vertex.Position = vector; 
 			// 法线
-			vector.x = mesh->mNormals[i].x;
-			vector.y = mesh->mNormals[i].y;
-			vector.z = mesh->mNormals[i].z;
-			vertex.Normal = vector;
+			if (mesh->HasNormals())
+			{
+				vector.x = mesh->mNormals[i].x;
+				vector.y = mesh->mNormals[i].y;
+				vector.z = mesh->mNormals[i].z;
+				vertex.Normal = vector;
+			}
 			// 纹理
 			if (mesh->mTextureCoords[0])
 			{
@@ -135,11 +137,11 @@ private:
 			aiFace face = mesh->mFaces[i];
 			for (unsigned int j = 0; j < face.mNumIndices; j++)
 			{
-				unsigned int idx = face.mIndices[j];
+				/* unsigned int idx = face.mIndices[j];
 				if (idx >= mesh->mNumVertices) {   // ← 硬检查
 					std::cout << "[processMesh] INDEX OUT OF RANGE: " << idx << " >= " << mesh->mNumVertices << '\n';
 					continue;                      // 丢弃这个索引
-				}
+				} */
 				indices.push_back(face.mIndices[j]);
 			}
 		}
