@@ -1,0 +1,3 @@
+﻿  main.cpp
+D:\WNY\CG\OpenGLLearning\projects\AdvancedOpenGL\StencilTesting\main.cpp(286,1): warning C4715: “initGLFW”: 不是所有的控件路径都返回值
+  StencilTesting.vcxproj -> D:\WNY\CG\OpenGLLearning\projects\AdvancedOpenGL\x64\Debug\StencilTesting.exe
