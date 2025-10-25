@@ -1,0 +1,3 @@
+﻿  main.cpp
+D:\WNY\CG\OpenGLLearning\projects\AdvancedOpenGL\FrameBuffers\main.cpp(335,1): warning C4715: “initGLFW”: 不是所有的控件路径都返回值
+  FrameBuffers.vcxproj -> D:\WNY\CG\OpenGLLearning\projects\AdvancedOpenGL\x64\Debug\FrameBuffers.exe
