@@ -1,25 +1,20 @@
 #version 330 core
 out vec4 FragColor;
 
-in vec2 TexCoords;
+in vec3 Normal;
+in vec3 Position;
 
-uniform sampler2D texture1;
-
-float near = 0.1; 
-float far  = 100.0; 
-
-float LinearizeDepth(float depth) 
-{
-    float z = depth * 2.0 - 1.0; // 转换为 NDC
-    return (2.0 * near * far) / (far + near - z * (far - near));    
-}
+uniform samplerCube skybox;
+uniform vec3 cameraPosition;
 
 void main()
 {    
-    vec4 texColor = texture(texture1, TexCoords);
-    // if (texColor.a < 0.1)
-    //     discard;
-    FragColor = texColor;
-    // float depth = LinearizeDepth(gl_FragCoord.z) / far;
-    // FragColor = vec4(vec3(depth), 1.0);
+	// 折射率
+	float ratio = 1.0 / 1.52;
+	vec3 I = normalize(Position - cameraPosition);
+	// 反射
+	// vec3 R = reflect(I, normalize(Normal));
+	// 折射
+	vec3 R = refract(I, normalize(Normal), ratio);
+	FragColor = vec4(texture(skybox, R).rgb, 1.0);
 }
