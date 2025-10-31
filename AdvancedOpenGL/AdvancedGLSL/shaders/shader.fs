@@ -1,6 +1,9 @@
 #version 330 core
 
-in vec2 TexCoord;
+in VS_OUT
+{
+	vec2 TexCoord;
+} fs_in;
 
 out vec4 FragColor;
 
@@ -16,7 +19,7 @@ void main()
 		FragColor = vec4(0.0, 1.0, 0.0, 1.0); */
 	// ÅÐ¶ÏÃæ³¯Ïò
 	if (gl_FrontFacing)
-		FragColor = texture(frontTex, TexCoord);
+		FragColor = texture(frontTex, fs_in.TexCoord);
 	else
-		FragColor = texture(backTex, TexCoord);
+		FragColor = texture(backTex, fs_in.TexCoord);
 }
