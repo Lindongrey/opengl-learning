@@ -52,48 +52,49 @@ int main()
 
     // 顶点数据
     float vertices[] = {
-        // positions        
-        -0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-
-        -0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
-
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-
-        -0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f, -0.5f,
-
-        -0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f
+        // positions          // texture Coords
+        // Back face
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // Bottom-left
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right
+         0.5f, -0.5f, -0.5f,  1.0f, 0.0f, // bottom-right         
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // bottom-left
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // top-left
+        // Front face
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-left
+         0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // bottom-right
+         0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // top-right
+         0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // top-right
+        -0.5f,  0.5f,  0.5f,  0.0f, 1.0f, // top-left
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-left
+        // Left face
+        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // top-right
+        -0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-left
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // bottom-left
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // bottom-left
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-right
+        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // top-right
+        // Right face
+         0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // top-left
+         0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // bottom-right
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right         
+         0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // bottom-right
+         0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // top-left
+         0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-left     
+         // Bottom face
+         -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // top-right
+          0.5f, -0.5f, -0.5f,  1.0f, 1.0f, // top-left
+          0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // bottom-left
+          0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // bottom-left
+         -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-right
+         -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // top-right
+         // Top face
+         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // top-left
+          0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // bottom-right
+          0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right     
+          0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // bottom-right
+         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // top-left
+         -0.5f,  0.5f,  0.5f,  0.0f, 0.0f  // bottom-left        
     };
 
     // 顶点 VAO VBO
@@ -104,8 +105,16 @@ int main()
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices, GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glBindVertexArray(0);
+    glBindVertexArray(1);
+
+    char frontPath[] = "resources/front.jpg";
+    char backPath[] = "resources/back.png";
+    unsigned int frontTexture = loadTexture(frontPath);
+    unsigned int backTexture = loadTexture(backPath);
 
     while (!glfwWindowShouldClose(window))
     {
@@ -134,6 +143,12 @@ int main()
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glBindVertexArray(0);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, frontTexture);
+        shader.setInt("frontTex", 0);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, backTexture);
+        shader.setInt("backTex", 1);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
