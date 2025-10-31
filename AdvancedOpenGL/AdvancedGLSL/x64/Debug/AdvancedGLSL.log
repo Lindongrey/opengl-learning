@@ -1,3 +1,3 @@
 ﻿  main.cpp
-D:\WNY\CG\OpenGLLearning\projects\AdvancedOpenGL\AdvancedGLSL\main.cpp(213,1): warning C4715: “initGLFW”: 不是所有的控件路径都返回值
+D:\WNY\CG\OpenGLLearning\projects\AdvancedOpenGL\AdvancedGLSL\main.cpp(236,1): warning C4715: “initGLFW”: 不是所有的控件路径都返回值
   AdvancedGLSL.vcxproj -> D:\WNY\CG\OpenGLLearning\projects\AdvancedOpenGL\x64\Debug\AdvancedGLSL.exe
