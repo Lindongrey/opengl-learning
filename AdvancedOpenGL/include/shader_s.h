@@ -79,6 +79,83 @@ public:
         glDeleteShader(vertex);
         glDeleteShader(fragment);
     }
+    // 包含几何着色器的构造函数
+    // ------------------------------------------------------------------------
+    Shader(const char* vertexPath, const char* grometryPath, const char* fragmentPath)
+    {
+        // 1. retrieve the vertex/fragment source code from filePath
+        // 读取着色器源码
+        std::string vertexCode;
+        std::string fragmentCode;
+        std::string geometryCode;
+        std::ifstream vShaderFile;
+        std::ifstream fShaderFile;
+        std::ifstream gShaderFile;
+        // ensure ifstream objects can throw exceptions:
+        vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+        fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+        gShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+        try
+        {
+            // open files
+            vShaderFile.open(vertexPath);
+            fShaderFile.open(fragmentPath);
+            gShaderFile.open(grometryPath);
+            std::stringstream vShaderStream, fShaderStream, gShaderStream;
+            // read file's buffer contents into streams
+            vShaderStream << vShaderFile.rdbuf();
+            fShaderStream << fShaderFile.rdbuf();
+            gShaderStream << gShaderFile.rdbuf();
+            // close file handlers
+            vShaderFile.close();
+            fShaderFile.close();
+            gShaderFile.close();
+            // convert stream into string
+            vertexCode = vShaderStream.str();
+            fragmentCode = fShaderStream.str();
+            geometryCode = gShaderStream.str();
+        }
+        catch (std::ifstream::failure& e)
+        {
+            std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << std::endl;
+        }
+        // 获得源码，开始构造着色器
+        const char* vShaderCode = vertexCode.c_str();
+        const char* fShaderCode = fragmentCode.c_str();
+        const char* gShaderCode = geometryCode.c_str();
+        // 2. compile shaders
+        unsigned int vertex, fragment, geometry;
+        // vertex shader
+        // 节点着色器
+        vertex = glCreateShader(GL_VERTEX_SHADER);
+        glShaderSource(vertex, 1, &vShaderCode, NULL);
+        glCompileShader(vertex);
+        checkCompileErrors(vertex, "VERTEX");
+        // fragment Shader
+        // 片段着色器
+        fragment = glCreateShader(GL_FRAGMENT_SHADER);
+        glShaderSource(fragment, 1, &fShaderCode, NULL);
+        glCompileShader(fragment);
+        checkCompileErrors(fragment, "FRAGMENT");
+        // 几何着色器
+        geometry = glCreateShader(GL_GEOMETRY_SHADER);
+        glShaderSource(geometry, 1, &gShaderCode, NULL);
+        glCompileShader(geometry);
+        checkCompileErrors(geometry, "GEOMETRY");
+        // shader Program
+        // 创建着色器程序并链接两个着色器实例
+        ID = glCreateProgram();
+        glAttachShader(ID, vertex);
+        glAttachShader(ID, fragment);
+        glAttachShader(ID, geometry);
+        glLinkProgram(ID);
+        checkCompileErrors(ID, "PROGRAM");
+        // delete the shaders as they're linked into our program now and no longer necessary
+        // 释放着色器
+        glDeleteShader(vertex);
+        glDeleteShader(fragment);
+        glDeleteShader(geometry);
+    }
     // activate the shader
     // ------------------------------------------------------------------------
     void use()

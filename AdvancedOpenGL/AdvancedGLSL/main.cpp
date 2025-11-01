@@ -116,6 +116,12 @@ int main()
     // 四个立方体着色器对应的索引
     unsigned int redCubeShaderIndex = glGetUniformBlockIndex(redShader.ID, "Matrices");
     glUniformBlockBinding(redShader.ID, redCubeShaderIndex, 0);
+    unsigned int greenCubeShaderIndex = glGetUniformBlockIndex(greenShader.ID, "Matrices");
+    glUniformBlockBinding(greenShader.ID, greenCubeShaderIndex, 0);
+    unsigned int blueCubeShaderIndex = glGetUniformBlockIndex(blueShader.ID, "Matrices");
+    glUniformBlockBinding(blueShader.ID, blueCubeShaderIndex, 0);
+    unsigned int yellowCubeShaderIndex = glGetUniformBlockIndex(yellowShader.ID, "Matrices");
+    glUniformBlockBinding(yellowShader.ID, yellowCubeShaderIndex, 0);
     // 设置 uniform 缓冲
     unsigned int uboMatrices;
     glGenBuffers(0, &uboMatrices);
