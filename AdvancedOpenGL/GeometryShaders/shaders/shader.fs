@@ -1,12 +1,17 @@
 #version 330 core
 
-in vec2 gTexCoord;
+out vec4 FragColor;
+
+/* in VS_OUT
+{
+    vec2 vTexCoord;
+} fs_in; */
+
+in vec2 vTexCoord;
 
 uniform sampler2D texture_diffuse1;
 
-out vec4 FragColor;
-
 void main()
 {
-	FragColor = texture(texture_diffuse1, gTexCoord);
+	FragColor = texture(texture_diffuse1, vTexCoord);
 }

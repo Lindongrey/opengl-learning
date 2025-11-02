@@ -48,7 +48,8 @@ int main()
     glEnable(GL_DEPTH_TEST);
     // glEnable(GL_PROGRAM_POINT_SIZE);
 
-    Shader shader("shaders/shader.vs", "shaders/shader.gs", "shaders/shader.fs");
+    Shader shader("shaders/shader.vs", "shaders/shader.fs");
+    Shader normalShader("shaders/normalShader.vs", "shaders/normalShader.gs", "shaders/normalShader.fs");
 
     // 加载模型
     char path[] = "resources/backpack.obj";
@@ -98,13 +99,19 @@ int main()
         glm::mat4 view = camera.GetViewMatrix();;
         glm::mat4 model = glm::mat4(1.0f);
 
+        // 这个模型本身有问题，贴图异常
         shader.use();
         shader.setMat4("projection", projection);
         shader.setMat4("view", view);
         shader.setMat4("model", model);
-        shader.setFloat("time", glfwGetTime());
-
+        // shader.setFloat("time", glfwGetTime());
         ourModel.Draw(shader);
+
+        normalShader.use();
+        normalShader.setMat4("projection", projection);
+        normalShader.setMat4("view", view);
+        normalShader.setMat4("model", model);
+        ourModel.Draw(normalShader);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

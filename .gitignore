@@ -1,5 +1,98 @@
-# Visual Studio intellisense cache
+# === 构建产物 ===
+# CMake
+build/
+cmake-build-*/
+out/
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+compile_commands.json
+install_manifest.txt
+CTestTestfile.cmake
+_deps/
+
+# Make / Ninja
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+*.app
+bin/
+lib/
+Debug/
+Release/
+RelWithDebInfo/
+MinSizeRel/
+
+# === IDE / 编辑器 ===
+# Visual Studio
 .vs/
+*.vcxproj.user
+*.vcxproj.filters
+*.suo
+*.sln.docstates
 *.ipch
 *.iobj
 *.ipdb
+CMakeSettings.json
+
+# VS Code
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# CLion / IntelliJ
+.idea/
+*.iml
+cmake-build-*/
+
+# Qt Creator
+*.pro.user
+*.pro.user.*
+
+# Xcode
+*.xcodeproj/
+*.xcworkspace/
+
+# === 系统垃圾 ===
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+*.swp
+*.swo
+*.bak
+*.log
+*.tmp
+
+# === 私有 / 敏感 ===
+.env
+*.key
+*.pem
+secrets/
+
+# === 其他 ===
+# 预编译头
+*.pch
+# 依赖管理子目录
+vcpkg_installed/
+
+# === 3D 模型 ===
+*.fbx
+*.glb
+*.gltf
+*.blend
+*.max
+*.obj
+*.mtl
+*.dae
+*.3ds
+*.ply
+*.stl
