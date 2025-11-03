@@ -57,6 +57,7 @@ public:
 			// 有多个光照纹理，解决正确绑定的问题
 			string name = textures[i].type;
 			string number;
+
 			if (name == "texture_diffuse")
 				number = to_string(diffuseNr++);
 			else if (name == "texture_specular")

@@ -193,6 +193,7 @@ private:
 				texture_loaded.push_back(texture);
 			}
 		}
+
 		return textures;
 	}
 };
