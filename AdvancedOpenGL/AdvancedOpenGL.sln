@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GeometryShaders", "Geometry
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Instancing", "Instancing\Instancing.vcxproj", "{D0B79255-CE08-4233-8C01-BC9B4922EFD8}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AntiAliasing", "AntiAliasing\AntiAliasing.vcxproj", "{27EE0B72-8C37-4FF8-A94C-962B632EC8B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -111,6 +113,14 @@ Global
 		{D0B79255-CE08-4233-8C01-BC9B4922EFD8}.Release|x64.Build.0 = Release|x64
 		{D0B79255-CE08-4233-8C01-BC9B4922EFD8}.Release|x86.ActiveCfg = Release|Win32
 		{D0B79255-CE08-4233-8C01-BC9B4922EFD8}.Release|x86.Build.0 = Release|Win32
+		{27EE0B72-8C37-4FF8-A94C-962B632EC8B9}.Debug|x64.ActiveCfg = Debug|x64
+		{27EE0B72-8C37-4FF8-A94C-962B632EC8B9}.Debug|x64.Build.0 = Debug|x64
+		{27EE0B72-8C37-4FF8-A94C-962B632EC8B9}.Debug|x86.ActiveCfg = Debug|Win32
+		{27EE0B72-8C37-4FF8-A94C-962B632EC8B9}.Debug|x86.Build.0 = Debug|Win32
+		{27EE0B72-8C37-4FF8-A94C-962B632EC8B9}.Release|x64.ActiveCfg = Release|x64
+		{27EE0B72-8C37-4FF8-A94C-962B632EC8B9}.Release|x64.Build.0 = Release|x64
+		{27EE0B72-8C37-4FF8-A94C-962B632EC8B9}.Release|x86.ActiveCfg = Release|Win32
+		{27EE0B72-8C37-4FF8-A94C-962B632EC8B9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
